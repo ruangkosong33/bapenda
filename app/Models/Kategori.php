@@ -4,15 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Banner extends Model
+class Kategori extends Model
 {
     use HasFactory, Sluggable;
 
-    protected $table='banners';
+    protected $table='kategoris';
 
-    protected $fillable=['title', 'slug', 'image'];
+    protected $fillable=['title', 'slug'];
 
     protected $hidden=[];
 
@@ -24,5 +25,11 @@ class Banner extends Model
                 'source' => 'title'
             ]
         ];
+    }
+
+    //RELATION
+    public function posts(): HasMany
+    {
+        return $this->hasMany(Post::class);
     }
 }
